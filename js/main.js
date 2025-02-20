@@ -9,7 +9,25 @@
             $('.navbar').removeClass('sticky-top');
         }
     });
-    
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+document.querySelectorAll(".add-to-cart").forEach(button => {
+    button.addEventListener("click", () => {
+        let name = button.getAttribute("data-name");
+        let price = parseFloat(button.getAttribute("data-price"));
+
+        let item = cart.find(product => product.name === name);
+        if (item) {
+            item.quantity++;
+        } else {
+            cart.push({ name, price, quantity: 1 });
+        }
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert(`${name} added to cart!`);
+    });
+});
+
     // Dropdown on mouse hover
     $(document).ready(function () {
         function toggleNavbarMethod() {
