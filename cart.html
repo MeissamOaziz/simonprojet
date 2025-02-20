@@ -1,0 +1,17 @@
+<div id="cart-items"></div>
+<button id="checkout">Proceed to Checkout</button>
+
+<script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let cartItems = document.getElementById("cart-items");
+
+    cart.forEach(item => {
+        let div = document.createElement("div");
+        div.innerHTML = `${item.name} - $${item.price} x ${item.quantity}`;
+        cartItems.appendChild(div);
+    });
+
+    document.getElementById("checkout").addEventListener("click", () => {
+        window.location.href = "checkout.html";
+    });
+</script>
